@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace BlogEngine.API.Controllers
 {
+    [Authorize( AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Editor")]
     [ApiController]
     [ApiVersion("1")]
     [Route("[controller]")]
@@ -21,6 +24,7 @@ namespace BlogEngine.API.Controllers
         }
 
         [HttpGet]
+        
         public IEnumerable<string> Get()
         {
             var list =new List<string>();

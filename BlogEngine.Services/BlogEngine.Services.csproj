@@ -1,5 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlogEngine.Repository\BlogEngine.Repository.csproj" />
+    <ProjectReference Include="..\BlogEngine.Domain\BlogEngine.Domain.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
