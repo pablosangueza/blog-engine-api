@@ -32,8 +32,8 @@ docker run -it --rm -p 5000:80 --name myapi blogengineapi
 
 ## Data Users and Passwords
 
-For time pruposes the the data, users and passwords are hardcoded on Repository component on a static class "HardCodeData"
-![alt text](https://github.com/pablosangueza/blog-engine-api/blob/main/BlogEngine.Repository/HardCodeData.cs)
+For time pruposes the the data, users and passwords are hardcoded on Repository component on a static class "HardCodeData.cs"
+![a link](https://github.com/pablosangueza/blog-engine-api/blob/main/BlogEngine.Repository/HardCodeData.cs)
 
 ```c#
             Users.Add(new User()
