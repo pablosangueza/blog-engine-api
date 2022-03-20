@@ -1,0 +1,1 @@
+//Code to perfom the Blog Engine API deploy on some cloud plataform as AWS
