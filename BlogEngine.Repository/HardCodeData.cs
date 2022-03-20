@@ -26,7 +26,8 @@ namespace BlogEngine.Repository
                 PublishDate = DateTime.Now,
                 Status = PostStatus.Approved,
                 Text = "Design patterns are .......",
-                Comments = new List<string>()
+                Comments = new List<string>(),
+                EditorComments = new List<string>()
             });
              Posts.Add(new BlogPost(){
                 Author = Users.Where(u => u.Username == "psangueza").SingleOrDefault(),
@@ -34,7 +35,9 @@ namespace BlogEngine.Repository
                 PublishDate = DateTime.Now,
                 Status = PostStatus.Approved,
                 Text = "Web Technologies are .......",
-                Comments = new List<string>()
+                Comments = new List<string>(),
+                EditorComments = new List<string>()
+
 
             });
              Posts.Add(new BlogPost(){
@@ -43,7 +46,9 @@ namespace BlogEngine.Repository
                 PublishDate = DateTime.Now,
                 Status = PostStatus.Pending,
                 Text = "Machine Learning is .......",
-                Comments = new List<string>()
+                Comments = new List<string>(),
+                EditorComments = new List<string>()
+
 
             });
               Posts.Add(new BlogPost(){
@@ -52,7 +57,9 @@ namespace BlogEngine.Repository
                 PublishDate = DateTime.Now,
                 Status = PostStatus.Editing,
                 Text = "Martials arts are ........",
-                Comments = new List<string>()
+                Comments = new List<string>(),
+                EditorComments = new List<string>()
+
 
             });
             Posts.Add(new BlogPost(){
@@ -61,7 +68,9 @@ namespace BlogEngine.Repository
                 PublishDate = DateTime.Now,
                 Status = PostStatus.Approved,
                 Text = "Revelation of God .......",
-                Comments = new List<string>()
+                Comments = new List<string>(),
+                EditorComments = new List<string>()
+
 
             });
             Posts.Add(new BlogPost(){
@@ -70,7 +79,9 @@ namespace BlogEngine.Repository
                 PublishDate = DateTime.Now,
                 Status = PostStatus.Pending,
                 Text = "THe war of truth is .......",
-                Comments = new List<string>()
+                Comments = new List<string>(),
+                EditorComments = new List<string>()
+
 
             });
         }

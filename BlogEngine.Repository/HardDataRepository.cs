@@ -23,7 +23,7 @@ namespace BlogEngine.Repository
 
         public async Task<BlogPost> GetPostByTitle(string title)
         {
-            return HardCodeData.Posts.Where(p=>p.Status == PostStatus.Approved && p.Title == title).FirstOrDefault();
+            return HardCodeData.Posts.Where(p=>p.Title == title).FirstOrDefault();
 
         }
 
@@ -44,7 +44,8 @@ namespace BlogEngine.Repository
 
         public async Task Update(BlogPost post)
         {
-           var postToUpdate = GetPostByTitle(post.Title);
+           var postToUpdate = await GetPostByTitle(post.Title);
+           postToUpdate = post;
            
         }
     }

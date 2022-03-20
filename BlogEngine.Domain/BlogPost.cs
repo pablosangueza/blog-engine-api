@@ -8,7 +8,8 @@ namespace BlogEngine.Domain
     {
         Pending = 0,
         Approved = 1,
-        Editing = 3
+        Editing = 3,
+        Rejected = 4
 
     }
     public class BlogPost
@@ -18,7 +19,9 @@ namespace BlogEngine.Domain
         public DateTime PublishDate { get; set; }
         public User Author { get; set; }
         public PostStatus Status { get; set; }
-        public IList<string> Comments {get; set;}
+        public IList<string> Comments { get; set; }
+        public IList<string> EditorComments { get; set; }
+
 
     }
 }

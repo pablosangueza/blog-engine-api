@@ -11,6 +11,6 @@ namespace BlogEngine.Repository
         Task<BlogPost> GetPostByTitle(string title);
         Task<User> GetUser(string username);
         Task<bool> AddPost(BlogPost post);
-        Task Update(BlogPost postWithTitle);
+        Task Update(BlogPost post);
     }
 }

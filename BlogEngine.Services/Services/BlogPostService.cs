@@ -19,7 +19,7 @@ namespace BlogEngine.Services.Services
         public async Task<bool> AddComment(string title, string comment)
         {
             BlogPost post = await _repository.GetPostByTitle(title);
-            if (post != null)
+            if (post != null && post.Status == PostStatus.Approved)
             {
                 post.Comments.Add(comment);
                 return true;

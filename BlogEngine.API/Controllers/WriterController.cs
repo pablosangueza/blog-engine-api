@@ -33,7 +33,7 @@ namespace BlogEngine.API.Controllers
                 var username = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
                 IList<BlogPost> posts = await _writerService.GetPostsOfUserName(username);
                 if (posts != null)
-                    return Ok(posts.Select(p => new { Title = p.Title, Author = p.Author.Name, Text = p.Text, Status = p.Status.ToString(), Comments = p.Comments }));
+                    return Ok(posts.Select(p => new { Title = p.Title, Author = p.Author.Name, Text = p.Text, Status = p.Status.ToString(), Comments = p.Comments, EditorComments = p.EditorComments }));
                 else
                     return NotFound(new { message = $"There is not any post for {username}" });
             }
