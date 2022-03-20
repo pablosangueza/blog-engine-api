@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BlogEngine.API.Controllers
 {
-    [Authorize( AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Editor")]
+    [Authorize]
     [ApiController]
     [ApiVersion("1")]
     [Route("[controller]")]
@@ -23,19 +23,22 @@ namespace BlogEngine.API.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        
-        public IEnumerable<string> Get()
+        [HttpGet("HealthCheck")]
+        public string HealthCheck()
         {
-            var list =new List<string>();
-            list.Add("test1");
-            list.Add("test2");
-            list.Add("test3");
+            return "Hello world from Blog Engine";
+        }
 
+        [HttpGet("ListPosts")]
+        public IEnumerable<string> GetAllPosts()
+        {
+            return new List<string>();
+        }
 
-            
-            return list;
-        
+        [HttpPost("CommentPost")]
+        public IActionResult CommentPost()
+        {
+            return Ok("done");
         }
     }
 }

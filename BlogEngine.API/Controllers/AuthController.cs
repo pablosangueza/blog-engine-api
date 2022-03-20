@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BlogEngine.API.Controllers
 {
+    
     [ApiController]
     [ApiVersion("1")]
     [Route("[controller]")]
@@ -28,7 +29,7 @@ namespace BlogEngine.API.Controllers
             _authService = authService;
         }
 
-        [HttpPost,  Route("login")]
+        [HttpPost, Route("login")]
         public async Task<IActionResult> Login([FromBody] UserLogin loginData)
         {
             IActionResult response = Unauthorized();  
