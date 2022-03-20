@@ -97,6 +97,9 @@ namespace BlogEngine.API
             }); 
 
             services.AddTransient<IAuthService, AuthenticationService>();
+            services.AddTransient<IBlogPostService, BlogPostService>();
+            services.AddTransient<IWriterService, WriterService>();
+
             services.AddTransient<IRepository, HardDataRepository>();
             HardCodeData.LoadData();
 

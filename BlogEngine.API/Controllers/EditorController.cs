@@ -15,16 +15,12 @@ namespace BlogEngine.API.Controllers
         {
             return new List<string>();
         }
-        [HttpPost("ApprovePost")]
+        [HttpPost("ApproveRejectPost")]
         public IActionResult ApprovePost()
         {
             return Ok();
         }
-        [HttpPost("RejectPost")]
-        public IActionResult RejectPost()
-        {
-            return Ok();
-        }
+      
 
 
 

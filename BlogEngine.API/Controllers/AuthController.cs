@@ -18,6 +18,7 @@ namespace BlogEngine.API.Controllers
     [ApiController]
     [ApiVersion("1")]
     [Route("[controller]")]
+    [ControllerName("Authentication")]
     public class AuthController : ControllerBase
     {
         private IAuthService _authService;

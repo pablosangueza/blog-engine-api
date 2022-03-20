@@ -1,4 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using BlogEngine.API.DTOs;
+using BlogEngine.Domain;
+using BlogEngine.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,30 +17,76 @@ namespace BlogEngine.API.Controllers
     [Route("[controller]")]
     public class WriterController : ControllerBase
     {
-        
-        [HttpGet("GetPosts")]
-        public IEnumerable<string> GetPosts()
+        private IWriterService _writerService;
+
+        public WriterController(IWriterService writerService)
         {
-            return new List<string>();
+            _writerService = writerService;
+        }
+
+        [HttpGet("GetPosts")]
+        public async Task<IActionResult> GetPosts()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                var username = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                IList<BlogPost> posts = await _writerService.GetPostsOfUserName(username);
+                if (posts != null)
+                    return Ok(posts.Select(p => new { Title = p.Title, Author = p.Author.Name, Text = p.Text, Status = p.Status.ToString(), Comments = p.Comments }));
+                else
+                    return NotFound(new { message = $"There is not any post for {username}" });
+            }
+
+            return NoContent();
         }
 
         [HttpPost("CreatePost")]
-        public IActionResult CreatePost()
+        public async Task<IActionResult> CreatePost([FromBody] PostDto newPost)
         {
-            return Ok();
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                var username = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                bool res = await _writerService.AddNewPost(username, newPost.Title, newPost.Text);
+                if (res)
+                    return Ok(new { message = $"Post {newPost.Title} was created but is pending to get approval" });
+                else
+                    return BadRequest(new { message = "There was an error on post creation" });
+
+            }
+            return NoContent();
+
         }
 
         [HttpPut("EditPost")]
-        public IActionResult EditPost()
+        public async Task<IActionResult> EditPost([FromBody] PostDto post)
         {
-            return Ok();
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            try
+            {
+                if (identity != null)
+                {
+                    var username = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    await _writerService.EditPost(username, post.Title, post.Text);
+                    return Ok(new { message = $"Post {post.Title} was updated but is pending to get approval" });
+
+                }
+
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new {message = ex.Message});
+            }
+
+            return NoContent();
         }
 
-        [HttpGet("SubmitPost")]
+        [HttpPost("SubmitPost")]
         public IActionResult SubmitPost()
         {
             return Ok();
         }
-        
+
     }
 }
