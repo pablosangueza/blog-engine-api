@@ -50,7 +50,7 @@ namespace BlogEngine.API.Controllers
                 var username = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
                 bool res = await _writerService.AddNewPost(username, newPost.Title, newPost.Text);
                 if (res)
-                    return Ok(new { message = $"Post {newPost.Title} was created but is pending to get approval" });
+                    return Ok(new { message = $"Post {newPost.Title} was created." });
                 else
                     return BadRequest(new { message = "There was an error on post creation" });
 
@@ -69,23 +69,41 @@ namespace BlogEngine.API.Controllers
                 {
                     var username = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
                     await _writerService.EditPost(username, post.Title, post.Text);
-                    return Ok(new { message = $"Post {post.Title} was updated but is pending to get approval" });
+                    return Ok(new { message = $"Post {post.Title} was updated" });
 
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return BadRequest(new {message = ex.Message});
+                return BadRequest(new { message = ex.Message });
             }
 
             return NoContent();
         }
 
         [HttpPost("SubmitPost")]
-        public IActionResult SubmitPost()
+        public async Task<IActionResult> SubmitPost([FromForm] string title)
         {
-            return Ok();
+
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            try
+            {
+                if (identity != null)
+                {
+                    var username = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    await _writerService.SubmitPost(username, title);
+                    return Ok(new { message = $"Post {title} was Submited" });
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+
+            return NoContent();
         }
 
     }

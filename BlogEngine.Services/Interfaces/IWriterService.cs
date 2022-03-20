@@ -9,5 +9,6 @@ namespace BlogEngine.Services.Interfaces
         Task<IList<BlogPost>> GetPostsOfUserName(string username);
         Task<bool> AddNewPost(string username, string title, string text);
         Task EditPost(string username, string title, string text);
+        Task SubmitPost(string username, string title);
     }
 }

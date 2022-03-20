@@ -32,7 +32,7 @@ namespace BlogEngine.Services.Services
                     PublishDate = DateTime.Now,
                     Status = PostStatus.Pending,
                 };
-                return  await _repository.AddPost(post);
+                return await _repository.AddPost(post);
             }
             else
                 return false;
@@ -43,8 +43,8 @@ namespace BlogEngine.Services.Services
         {
             User user = await _repository.GetUser(username);
             IList<BlogPost> posts = await GetPostsOfUserName(username);
-            var postWithTitle = posts.Where(p =>p.Title == title && p.Status == PostStatus.Editing).SingleOrDefault();
-            if(postWithTitle != null)
+            var postWithTitle = posts.Where(p => p.Title == title && p.Status == PostStatus.Editing).SingleOrDefault();
+            if (postWithTitle != null)
             {
                 postWithTitle.Text = text;
                 postWithTitle.Status = PostStatus.Editing;
@@ -52,7 +52,7 @@ namespace BlogEngine.Services.Services
             }
             else
                 throw new Exception("There is no a Post with that title to edit or update");
-           
+
         }
 
         public async Task<IList<BlogPost>> GetPostsOfUserName(string username)
@@ -65,6 +65,21 @@ namespace BlogEngine.Services.Services
             }
             else
                 return null;
+        }
+
+        public async Task SubmitPost(string username, string title)
+        {
+            User user = await _repository.GetUser(username);
+            IList<BlogPost> posts = await GetPostsOfUserName(username);
+            var postWithTitle = posts.Where(p => p.Title == title && p.Status == PostStatus.Editing).SingleOrDefault();
+            if (postWithTitle != null)
+            {
+                postWithTitle.Status = PostStatus.Pending;
+                await _repository.Update(postWithTitle);
+            }
+            else
+                throw new Exception($"There is no a Post with title \"{title}\" for to submit");
+
         }
     }
 }
