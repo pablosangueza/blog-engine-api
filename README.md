@@ -17,7 +17,7 @@ Open Browser on : https://localhost:5001/index.html
 
 Swagger Should be loaded.
 
-![alt text](https://github.com//pablosangueza/blog-engine-api/main/SwaggerAPI.png?raw=true)
+![alt text](https://github.com//pablosangueza/blog-engine-api/main/ExternalResources/SwaggerAPI.png?raw=true)
 
 ## Run Application with Docker
 
