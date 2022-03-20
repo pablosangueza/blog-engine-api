@@ -101,7 +101,6 @@ namespace BlogEngine.API
             services.AddTransient<IWriterService, WriterService>();
             services.AddTransient<IEditorService, EditorService>();
 
-
             services.AddTransient<IRepository, HardDataRepository>();
             HardCodeData.LoadData();
 
