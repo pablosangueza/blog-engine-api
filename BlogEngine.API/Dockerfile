@@ -1,12 +1,12 @@
 #Instructions to build the Blog Engine API into a Docker container
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim as base
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS devBase
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster as devbase
 WORKDIR /src
 
-FROM devBase as build
+FROM devbase as build
 COPY . .
 RUN dotnet build "BlogEngine.API.sln" -c Release -o /app
 
