@@ -29,7 +29,7 @@ docker build -t blogengineapi .
 ```bash
 docker run -it --rm -p 5000:80 --name myapi blogengineapi
 ```
-Open Browser on : https://localhost:5001/index.html
+Open Browser on : http://localhost:5001/index.html
 
 ## Data Users and Passwords
 
