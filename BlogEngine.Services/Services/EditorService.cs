@@ -17,6 +17,9 @@ namespace BlogEngine.Services.Services
         {
             _repository = repository;
         }
+        
+        
+        
 
         public async Task ApprovePost(string title, bool approveReject, string comment)
         {
