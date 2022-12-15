@@ -15,7 +15,7 @@ namespace BlogEngine.API
         {
             CreateHostBuilder(args).Build().Run();
         }
-
+        // other thing
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

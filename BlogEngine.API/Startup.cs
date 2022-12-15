@@ -129,7 +129,8 @@ namespace BlogEngine.API
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
+            // This is a comment
 
             app.UseRouting();
 
